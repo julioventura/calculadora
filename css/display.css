@@ -40,14 +40,19 @@ body {
 }
 
 .display {
-    background-color: #c8e6c9;
-    border: 1px solid #2e7d32;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    padding: 10px;
-    font-family: 'Digital-7', monospace;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #0a0a0a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    margin-bottom: 15px; /* Reduzido de 20px */
+    padding: 15px;
+    font-family: 'Share Tech Mono', monospace;
+    box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
     position: relative;
+    height: 180px; /* Reduzido de 200px */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
 }
 
 #displayInput {
@@ -55,16 +60,71 @@ body {
     background: transparent;
     border: none;
     text-align: right;
-    font-size: 2rem;
+    font-size: 1.8rem; /* Reduzido de 2rem */
     font-family: 'Share Tech Mono', monospace;
-    color: #333;
-    min-height: 40px;
+    color: #0f0; /* Classic green OLED */
+    margin-bottom: 5px;
 }
 
 .secondary-display {
-    font-size: 0.8rem;
-    color: #666;
+    font-size: 1rem;
+    color: #0a0;
     text-align: right;
-    height: 1rem;
     margin-bottom: 5px;
+    flex-grow: 0;
+    height: 1.5rem; /* Altura fixa para a expressão */
+    white-space: nowrap;  /* Impede quebra de linha */
+    overflow-x: auto;    /* Adiciona rolagem horizontal se necessário */
+    font-family: 'Share Tech Mono', monospace; /* Mesma fonte do display principal */
+    padding-right: 5px;
+}
+
+.equation-history {
+    color: #0c0;
+    font-family: 'Share Tech Mono', monospace;
+    padding: 2px 0;
+    border-bottom: 1px dotted rgba(0, 255, 0, 0.2);
+    text-align: right;
+}
+
+.multi-line-display {
+    flex-grow: 1;
+    overflow-y: auto;
+    color: #0d0;
+    font-size: 0.9rem;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: right; /* Alinhando à direita para as equações */
+}
+
+/* Style for displaying tables in the multi-line display */
+.display-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 5px 0;
+    font-size: 0.8rem;
+}
+
+.display-table th, .display-table td {
+    border: 1px solid #0a0;
+    padding: 2px 4px;
+    text-align: center;
+}
+
+/* Style for displaying graphics/charts */
+.display-chart {
+    width: 100%;
+    height: 100px;
+    background: #000;
+    border: 1px solid #0a0;
+    margin: 5px 0;
+    position: relative;
+}
+
+.chart-line {
+    position: absolute;
+    background-color: #0f0;
+    height: 1px;
 }

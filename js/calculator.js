@@ -1,16 +1,17 @@
 // This file contains the main logic for the calculator, handling input, calculations, and updating the display.
 
 class Calculator {
-  constructor(displayElement) {
+  constructor(displayElement, display) {
     this.displayElement = displayElement;
+    this.display = display; // Armazenar a referência ao objeto display
     this.currentValue = '0';
-    this.pendingOperation = null;
     this.previousValue = null;
+    this.pendingOperation = null;
     this.waitingForSecondOperand = false;
-    this.lastResult = null;
-    this.numberSystem = 'decimal'; // decimal, binary, hex
+    this.lastResult = 0;
     this.memoryManager = new MemoryManager();
-    this.expressionHistory = [];
+    this.numberSystem = 'decimal';
+    this.expressionHistory = []; // Add this line to initialize the history array
   }
   
   updateDisplay() {
@@ -24,6 +25,12 @@ class Calculator {
     } else {
       this.currentValue = this.currentValue === '0' ? String(digit) : this.currentValue + digit;
     }
+    
+    // Adicionar verificação para evitar erros
+    if (this.display && typeof this.display.addNumberToExpression === 'function') {
+      this.display.addNumberToExpression(digit);
+    }
+    
     this.updateDisplay();
   }
   
@@ -42,6 +49,12 @@ class Calculator {
     this.pendingOperation = null;
     this.previousValue = null;
     this.waitingForSecondOperand = false;
+    
+    // Adicionar verificação para evitar erros
+    if (this.display && typeof this.display.clearExpression === 'function') {
+      this.display.clearExpression();
+    }
+    
     this.updateDisplay();
   }
   
@@ -59,6 +72,12 @@ class Calculator {
     
     this.waitingForSecondOperand = true;
     this.pendingOperation = operation;
+    
+    // Adicionar verificação para evitar erros
+    if (this.display && typeof this.display.addOperatorToExpression === 'function') {
+      this.display.addOperatorToExpression(operation);
+    }
+    
     this.updateDisplay();
   }
   
@@ -109,6 +128,11 @@ class Calculator {
     this.waitingForSecondOperand = false;
     this.lastResult = result;
     
+    // Adicionar verificação para evitar erros
+    if (this.display && typeof this.display.finalizeEquation === 'function') {
+      this.display.finalizeEquation(result);
+    }
+    
     this.updateDisplay();
   }
   
@@ -129,6 +153,12 @@ class Calculator {
       this.currentValue = this.currentValue.slice(0, -1);
     }
     this.updateDisplay();
+  }
+  
+  handleParenthesis(parenthesis) {
+    // Add parenthesis to expression
+    this.display.addParenthesisToExpression(parenthesis);
+    // Logic to process the parenthesis...
   }
   
   // Advanced operations to be implemented in later steps

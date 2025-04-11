@@ -6,45 +6,128 @@ body {
     background-color: #f0f0f0;
 }
 
-.calculator {
-    width: 320px;
-    border: 2px solid #333;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    background-color: #fff;
-}
-
+/* Alterar a proporção da grade do teclado */
 .keypad {
     display: grid;
-    grid-gap: 8px;
-    padding: 20px;
+    grid-template-columns: 65% 35%; /* Manter a proporção */
+    grid-gap: 10px; /* Reduzido de 15px */
+    margin-top: 15px; /* Reduzido de 20px */
+    width: 100%;
 }
 
-.row {
+.main-keypad, .side-panel {
+    display: grid;
+    grid-gap: 8px; /* Reduzido de 10px */
+}
+
+.main-keypad {
+    display: grid;
+    grid-template-rows: auto auto auto auto auto; /* Ajusta para 5 linhas */
+    grid-gap: 10px; /* Aumentado de 8px */
+}
+
+.row, .number-pad, .function-row, .programming-row, .memory-row, .trig-row, .special-features-row {
+    grid-gap: 8px; /* Reduzido de 10px */
+    margin-bottom: 8px; /* Reduzido de 10px */
+}
+
+/* Reorganizar o layout das teclas numéricas para aproveitar mais espaço */
+.number-pad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Mantém 4 colunas */
+    grid-gap: 10px; /* Aumentado ligeiramente para dar mais espaço */
+    width: 100%;
+}
+
+/* Ajustar a largura das linhas de função */
+.function-row, .programming-row, .memory-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); /* Reduzido de 120px */
+    grid-gap: 8px; /* Reduzido de 10px */
+    margin-bottom: 15px; /* Aumentado de 8px para criar mais separação entre seções */
+}
+
+.conversion-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 8px; /* Reduzido de 10px */
+    margin-bottom: 8px; /* Reduzido de 10px */
+}
+
+.trig-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 8px;
-    margin-bottom: 8px;
+    grid-gap: 8px; /* Reduzido de 10px */
+    margin-bottom: 8px; /* Reduzido de 10px */
 }
 
+.special-features-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 8px; /* Reduzido de 10px */
+    margin-bottom: 8px; /* Reduzido de 10px */
+}
+
+/* Adicione esta definição para a linha extra de teclas */
+.extra-keys-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.extra-keys-row .key {
+    min-height: 50px;
+    font-size: 1.1rem;
+}
+
+/* Criar uma área de respiro entre seções principais */
+.main-keypad > div:not(:last-child) {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
+}
+
+/* Ajustar a largura das linhas de função do painel lateral (após linha 60) */
+.side-panel .trig-row, 
+.side-panel .special-features-row {
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 8px; /* Reduzido de 10px para 8px */
+}
+
+.side-panel .key {
+    min-width: 0; /* Remove a largura mínima para permitir maior flexibilidade */
+    padding: 8px 4px; /* Reduzido ainda mais */
+    font-size: 0.9rem; /* Tamanho de fonte menor */
+}
+
+/* Reduzir o tamanho das teclas */
 .key {
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    font-size: 1.2rem;
+    background-color: #3d3d3d;
+    border: 1px solid #555;
+    border-radius: 6px;
+    padding: 10px 6px; /* Reduzido de 12px 8px */
+    font-size: 1rem; /* Reduzido de 1.1rem */
     cursor: pointer;
-    transition: background-color 0.2s;
-    min-height: 45px;
+    transition: all 0.2s;
+    min-height: 40px; /* Reduzido de 50px */
+    min-width: 60px; /* Reduzido de 80px */
+    color: #fff;
+    box-shadow: 0 4px 0 #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .key:hover {
-    background-color: #e0e0e0;
+    background-color: #4a4a4a;
 }
 
 .key:active {
-    background-color: #d0d0d0;
-    transform: translateY(1px);
+    background-color: #555;
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #2a2a2a;
 }
 
 .key.disabled {
@@ -52,32 +135,135 @@ body {
     cursor: not-allowed;
 }
 
+/* Destacar teclas mais utilizadas */
+.key-highlight {
+    border: 2px solid #0ff;
+    box-shadow: 0 4px 0 #2a2a2a, 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Animação sutil de pulsação para as teclas destacadas */
+@keyframes pulse {
+    0% { box-shadow: 0 4px 0 #2a2a2a, 0 0 5px rgba(0, 255, 255, 0.3); }
+    50% { box-shadow: 0 4px 0 #2a2a2a, 0 0 15px rgba(0, 255, 255, 0.5); }
+    100% { box-shadow: 0 4px 0 #2a2a2a, 0 0 5px rgba(0, 255, 255, 0.3); }
+}
+
+.key-highlight:hover {
+    animation: pulse 1.5s infinite;
+}
+
 /* Operation keys */
-#btnAdd, #btnSubtract, #btnMultiply, #btnDivide, #btnEquals {
-    background-color: #4caf50;
+.operation-key {
+    background-color: #ff9f43;
     color: white;
+    box-shadow: 0 4px 0 #e67e22;
+    font-size: 1.3rem; /* Aumentado */
+    min-height: 55px; /* Mesmo tamanho das teclas numéricas */
+}
+
+.operation-key:hover {
+    background-color: #ffa752;
+}
+
+.operation-key:active {
+    background-color: #e67e22;
+    box-shadow: 0 2px 0 #d35400;
 }
 
 /* Memory keys */
-#btnMemoryStore, #btnMemoryRecall, #btnMemoryClear, #btnMemorySwitch {
-    background-color: #ffa726;
+.memory-key {
+    background-color: #54a0ff;
+    color: white;
+    box-shadow: 0 4px 0 #2e86de;
+}
+
+.memory-key:hover {
+    background-color: #73aeff;
 }
 
 /* Function keys */
-#btnSin, #btnCos, #btnTan, #btnHyp,
-#btnLog, #btnLn, #btnSquareRoot, #btnExponent, #btnPi {
-    background-color: #7986cb;
+.function-key {
+    background-color: #5f27cd;
     color: white;
+    box-shadow: 0 4px 0 #341f97;
 }
 
-/* Number system keys */
-#btnBinary, #btnDecimalMode, #btnHexadecimal {
-    background-color: #90a4ae;
-    color: white;
+.function-key:hover {
+    background-color: #6c44e0;
 }
 
-/* Clear and sign keys */
-#btnClear, #btnSign, #btnPercent {
-    background-color: #ef5350;
+/* Special function keys */
+.special-key {
+    background-color: #ee5253;
     color: white;
+    box-shadow: 0 4px 0 #c0392b;
+}
+
+.special-key:hover {
+    background-color: #ff6b6b;
+}
+
+/* Number keys */
+.number-key {
+    background-color: #636e72;
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem; /* Aumentado de 1.2rem */
+    box-shadow: 0 4px 0 #2d3436;
+    min-height: 55px; /* Aumentado para teclas maiores */
+    padding: 12px 8px; /* Mais espaço interno */
+}
+
+.number-key:hover {
+    background-color: #74858a;
+}
+
+/* Feature keys */
+.feature-key {
+    background-color: #10ac84;
+    color: white;
+    box-shadow: 0 4px 0 #0b8a6d;
+    font-size: 0.85rem; /* Reduzido de 0.9rem */
+}
+
+.feature-key:hover {
+    background-color: #1dd1a1;
+}
+
+/* Programming keys */
+.programming-key {
+    background-color: #6c5ce7;
+    color: white;
+    box-shadow: 0 4px 0 #4834d4;
+}
+
+/* Statistics keys */
+.statistics-key {
+    background-color: #00b894;
+    color: white;
+    box-shadow: 0 4px 0 #00a885;
+}
+
+/* Science keys */
+.science-key {
+    background-color: #0984e3;
+    color: white;
+    box-shadow: 0 4px 0 #0769b1;
+}
+
+/* Equal key (make it stand out) */
+.equal-key {
+    background-color: #00cec9;
+    color: white;
+    box-shadow: 0 4px 0 #00b5b1;
+    grid-column: span 2; /* Ocupa duas colunas */
+    font-size: 1.5rem; /* Maior que as outras */
+    min-height: 55px; /* Mesmo tamanho das outras teclas */
+}
+
+/* Financial keys */
+.financial-key {
+    background-color: #fdcb6e;
+    color: #2d3436;
+    box-shadow: 0 4px 0 #e9b94c;
 }

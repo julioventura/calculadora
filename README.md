@@ -16,7 +16,7 @@ E agora podemos implementar mais do que imaginamos: até ferramentas de IA.
 
 ## GIT
 
-git init
-git add .
-git commit -m "Sua mensagem" --no-verify
-git push
+- git init
+- git add .
+- git commit -m "Sua mensagem" --no-verify
+- git push

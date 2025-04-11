@@ -1,0 +1,51 @@
+/* This file allows for different themes to be applied to the calculator, enabling customization of colors and styles. */
+
+body {
+    --primary-bg-color: #000;
+    --primary-text-color: #0f0;
+    --button-bg-color: #333;
+    --button-text-color: #fff;
+    --button-hover-bg-color: #555;
+    --display-bg-color: #222;
+    --display-text-color: #0f0;
+}
+
+.theme-light {
+    --primary-bg-color: #fff;
+    --primary-text-color: #000;
+    --button-bg-color: #e0e0e0;
+    --button-text-color: #000;
+    --button-hover-bg-color: #ccc;
+    --display-bg-color: #f0f0f0;
+    --display-text-color: #000;
+}
+
+.theme-dark {
+    --primary-bg-color: #000;
+    --primary-text-color: #0f0;
+    --button-bg-color: #333;
+    --button-text-color: #fff;
+    --button-hover-bg-color: #555;
+    --display-bg-color: #222;
+    --display-text-color: #0f0;
+}
+
+.theme-blue {
+    --primary-bg-color: #001f3f;
+    --primary-text-color: #ffffff;
+    --button-bg-color: #007bff;
+    --button-text-color: #ffffff;
+    --button-hover-bg-color: #0056b3;
+    --display-bg-color: #001f3f;
+    --display-text-color: #ffffff;
+}
+
+.theme-green {
+    --primary-bg-color: #004d00;
+    --primary-text-color: #ffffff;
+    --button-bg-color: #28a745;
+    --button-text-color: #ffffff;
+    --button-hover-bg-color: #218838;
+    --display-bg-color: #004d00;
+    --display-text-color: #ffffff;
+}

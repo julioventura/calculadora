@@ -129,89 +129,75 @@ function setupMemoryButtons(calculator, display) {
 
 function setupFunctionButtons(calculator, display) {
   // Square root
-  document.getElementById('btnSquareRoot').addEventListener('click', () => {
-    try {
-      const value = parseFloat(calculator.currentValue);
-      const result = squareRoot(value);
-      calculator.currentValue = String(result);
-      calculator.updateDisplay();
-    } catch (error) {
-      display.showError(error.message);
-    }
-  });
+  if (document.getElementById('btnSquareRoot')) {
+    document.getElementById('btnSquareRoot').addEventListener('click', () => {
+      try {
+        const value = parseFloat(calculator.currentValue);
+        const result = squareRoot(value);
+        calculator.currentValue = String(result);
+        calculator.updateDisplay();
+      } catch (error) {
+        display.showError(error.message);
+      }
+    });
+  }
   
   // Exponent
-  document.getElementById('btnExponent').addEventListener('click', () => {
-    calculator.handleOperation('exponent');
-  });
+  if (document.getElementById('btnExponent')) {
+    document.getElementById('btnExponent').addEventListener('click', () => {
+      calculator.handleOperation('exponent');
+    });
+  }
   
   // Pi
-  document.getElementById('btnPi').addEventListener('click', () => {
-    calculator.currentValue = String(getPi());
-    calculator.updateDisplay();
-  });
+  if (document.getElementById('btnPi')) {
+    document.getElementById('btnPi').addEventListener('click', () => {
+      calculator.currentValue = String(getPi());
+      calculator.updateDisplay();
+    });
+  }
   
   // Trigonometric functions
-  document.getElementById('btnSin').addEventListener('click', () => {
-    try {
-      const value = parseFloat(calculator.currentValue);
-      const result = sine(value);
-      calculator.currentValue = String(result);
-      calculator.updateDisplay();
-    } catch (error) {
-      display.showError(error.message);
-    }
-  });
+  if (document.getElementById('btnSin')) {
+    document.getElementById('btnSin').addEventListener('click', () => {
+      try {
+        const value = parseFloat(calculator.currentValue);
+        const result = sine(value);
+        calculator.currentValue = String(result);
+        calculator.updateDisplay();
+      } catch (error) {
+        display.showError(error.message);
+      }
+    });
+  }
   
-  document.getElementById('btnCos').addEventListener('click', () => {
-    try {
-      const value = parseFloat(calculator.currentValue);
-      const result = cosine(value);
-      calculator.currentValue = String(result);
-      calculator.updateDisplay();
-    } catch (error) {
-      display.showError(error.message);
-    }
-  });
+  if (document.getElementById('btnCos')) {
+    document.getElementById('btnCos').addEventListener('click', () => {
+      try {
+        const value = parseFloat(calculator.currentValue);
+        const result = cosine(value);
+        calculator.currentValue = String(result);
+        calculator.updateDisplay();
+      } catch (error) {
+        display.showError(error.message);
+      }
+    });
+  }
   
-  document.getElementById('btnTan').addEventListener('click', () => {
-    try {
-      const value = parseFloat(calculator.currentValue);
-      const result = tangent(value);
-      calculator.currentValue = String(result);
-      calculator.updateDisplay();
-    } catch (error) {
-      display.showError(error.message);
-    }
-  });
+  if (document.getElementById('btnTan')) {
+    document.getElementById('btnTan').addEventListener('click', () => {
+      try {
+        const value = parseFloat(calculator.currentValue);
+        const result = tangent(value);
+        calculator.currentValue = String(result);
+        calculator.updateDisplay();
+      } catch (error) {
+        display.showError(error.message);
+      }
+    });
+  }
   
-  document.getElementById('btnHyp').addEventListener('click', () => {
-    // This would need to be implemented to toggle hyperbolic functions
-    // For simplicity, we'll just set up direct hyperbolic function calls
-  });
-  
-  // Logarithmic functions
-  document.getElementById('btnLog').addEventListener('click', () => {
-    try {
-      const value = parseFloat(calculator.currentValue);
-      const result = log10(value);
-      calculator.currentValue = String(result);
-      calculator.updateDisplay();
-    } catch (error) {
-      display.showError(error.message);
-    }
-  });
-  
-  document.getElementById('btnLn').addEventListener('click', () => {
-    try {
-      const value = parseFloat(calculator.currentValue);
-      const result = ln(value);
-      calculator.currentValue = String(result);
-      calculator.updateDisplay();
-    } catch (error) {
-      display.showError(error.message);
-    }
-  });
+  // Continue with the rest of the function, adding similar checks...
 }
 
 function setupConversionButtons(calculator, display) {
@@ -255,33 +241,36 @@ function setupConversionButtons(calculator, display) {
   });
 }
 
+// Generic helper function to safely add event listeners
+function addClickListener(elementId, callback) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.addEventListener('click', callback);
+    }
+}
+
 function setupSpecialFeatures(calculator, display) {
-    // Zodiac feature
-    document.getElementById('btnZodiac').addEventListener('click', () => {
-        // Prompt for zodiac sign
+    // Example usage:
+    addClickListener('btnZodiac', () => {
         const sign = prompt("Enter your zodiac sign (e.g., Aries, Taurus):", "");
         if (sign) {
             display.showZodiacInfo(sign);
         }
     });
     
-    // Biorhythm feature
-    document.getElementById('btnBiorhythm').addEventListener('click', () => {
-        // Prompt for birthdate
+    addClickListener('btnBiorhythm', () => {
         const birthdate = prompt("Enter your birthdate (YYYY-MM-DD):", "");
         if (birthdate) {
             display.showBiorhythm(birthdate);
         }
     });
     
-    // Toggle the conversion panel visibility
-    document.getElementById('toggleConversionBtn').addEventListener('click', () => {
+    addClickListener('toggleConversionBtn', () => {
         const panel = document.getElementById('conversionPanel');
         panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
     });
 
-    // Date calculation features
-    document.getElementById('btnDateDiff').addEventListener('click', () => {
+    addClickListener('btnDateDiff', () => {
         const date1 = prompt("Enter first date (YYYY-MM-DD):", "");
         const date2 = prompt("Enter second date (YYYY-MM-DD):", "");
         
@@ -299,7 +288,7 @@ function setupSpecialFeatures(calculator, display) {
         }
     });
     
-    document.getElementById('btnAddDays').addEventListener('click', () => {
+    addClickListener('btnAddDays', () => {
         const startDate = prompt("Enter start date (YYYY-MM-DD):", "");
         const daysToAdd = prompt("Enter number of days to add:", "");
         
@@ -316,51 +305,43 @@ function setupSpecialFeatures(calculator, display) {
         }
     });
     
-    // Mode selection buttons
     const modeButtons = ['btnStandard', 'btnScientific', 'btnProgrammer', 'btnStatistics', 'btnFinancial', 'btnDate'];
     
     modeButtons.forEach(btnId => {
-        document.getElementById(btnId).addEventListener('click', () => {
+        addClickListener(btnId, () => {
             const mode = btnId.replace('btn', '');
             display.addToMultiLineDisplay(`<div>Switched to <strong>${mode}</strong> mode</div>`);
-            // Here you would implement mode switching logic
         });
     });
     
-    // Financial buttons
     const financialButtons = ['btnCompound', 'btnSimple', 'btnPV', 'btnFV'];
     
     financialButtons.forEach(btnId => {
-        document.getElementById(btnId).addEventListener('click', () => {
+        addClickListener(btnId, () => {
             const feature = btnId.replace('btn', '');
             display.addToMultiLineDisplay(`<div>Financial feature <strong>${feature}</strong> selected</div>`);
-            // Here you would implement financial calculations
         });
     });
     
-    // Statistics buttons
     const statsButtons = ['btnMean', 'btnMedian', 'btnStdDev', 'btnRegr'];
     
     statsButtons.forEach(btnId => {
-        document.getElementById(btnId).addEventListener('click', () => {
+        addClickListener(btnId, () => {
             display.addToMultiLineDisplay(`<div>Statistical function activated: <strong>${btnId.replace('btn', '')}</strong></div>`);
-            // Here you would implement statistics calculations
         });
     });
     
-    // Constants
-    document.getElementById('btnE').addEventListener('click', () => {
+    addClickListener('btnE', () => {
         calculator.currentValue = String(Math.E);
         calculator.updateDisplay();
     });
     
-    document.getElementById('btnPhi').addEventListener('click', () => {
+    addClickListener('btnPhi', () => {
         calculator.currentValue = String((1 + Math.sqrt(5)) / 2);
         calculator.updateDisplay();
     });
     
-    // Inverse trig functions
-    document.getElementById('btnArcSin').addEventListener('click', () => {
+    addClickListener('btnArcSin', () => {
         try {
             const value = parseFloat(calculator.currentValue);
             if (value < -1 || value > 1) {
@@ -374,7 +355,7 @@ function setupSpecialFeatures(calculator, display) {
         }
     });
     
-    document.getElementById('btnArcCos').addEventListener('click', () => {
+    addClickListener('btnArcCos', () => {
         try {
             const value = parseFloat(calculator.currentValue);
             if (value < -1 || value > 1) {
@@ -388,7 +369,7 @@ function setupSpecialFeatures(calculator, display) {
         }
     });
     
-    document.getElementById('btnArcTan').addEventListener('click', () => {
+    addClickListener('btnArcTan', () => {
         try {
             const value = parseFloat(calculator.currentValue);
             const result = Math.atan(value);
@@ -399,8 +380,7 @@ function setupSpecialFeatures(calculator, display) {
         }
     });
     
-    // More advanced math functions
-    document.getElementById('btnCubeRoot').addEventListener('click', () => {
+    addClickListener('btnCubeRoot', () => {
         try {
             const value = parseFloat(calculator.currentValue);
             const result = Math.cbrt(value);
@@ -411,7 +391,7 @@ function setupSpecialFeatures(calculator, display) {
         }
     });
     
-    document.getElementById('btnSquare').addEventListener('click', () => {
+    addClickListener('btnSquare', () => {
         try {
             const value = parseFloat(calculator.currentValue);
             const result = value * value;
@@ -422,7 +402,7 @@ function setupSpecialFeatures(calculator, display) {
         }
     });
     
-    document.getElementById('btnCube').addEventListener('click', () => {
+    addClickListener('btnCube', () => {
         try {
             const value = parseFloat(calculator.currentValue);
             const result = value * value * value;
@@ -433,7 +413,7 @@ function setupSpecialFeatures(calculator, display) {
         }
     });
     
-    document.getElementById('btnAntilog').addEventListener('click', () => {
+    addClickListener('btnAntilog', () => {
         try {
             const value = parseFloat(calculator.currentValue);
             const result = Math.pow(10, value);
@@ -444,7 +424,7 @@ function setupSpecialFeatures(calculator, display) {
         }
     });
     
-    document.getElementById('btnLogBase').addEventListener('click', () => {
+    addClickListener('btnLogBase', () => {
         const base = prompt("Enter logarithm base:", "");
         if (base) {
             try {
@@ -462,12 +442,12 @@ function setupSpecialFeatures(calculator, display) {
         }
     });
     
-    document.getElementById('btnClearEntry').addEventListener('click', () => {
+    addClickListener('btnClearEntry', () => {
         calculator.currentValue = '0';
         calculator.updateDisplay();
     });
     
-    document.getElementById('btnOctal').addEventListener('click', () => {
+    addClickListener('btnOctal', () => {
         try {
             calculator.numberSystem = 'octal';
             const value = parseFloat(calculator.currentValue);

@@ -2,8 +2,6 @@
 
 Calculadora científica dos sonhos
 
-# Calculadora
-
 Esta é uma aplicação de calculadora juntando aqueles elementos que mais gostamos das calculadoras científicas.
 E agora podemos implementar mais do que imaginamos: até ferramentas de IA.
 
